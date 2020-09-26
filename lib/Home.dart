@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sgpa_sem5/flower.dart';
+
+import 'matrix/Matrix.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,18 +29,19 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               InkWell(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Flower()));
-                  },
-                  child: Text(
-                    "FLOWERR",
-                    style: GoogleFonts.blackOpsOne(
-                        textStyle: TextStyle(
-                      color: Colors.black,
-                      fontSize: 32,
-                    )),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Flower()));
+                },
+                child: Text(
+                  "FLOWER",
+                  style: GoogleFonts.blackOpsOne(
+                      textStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 32,
                   )),
+                ),
+              ),
             ],
           ),
         ),
@@ -54,9 +57,17 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               InkWell(
-                onTap: () {},
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20.0),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MatrixEffect()));
+                },
+                child: Text(
+                  "MATRIX",
+                  style: GoogleFonts.blackOpsOne(
+                      textStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 32,
+                  )),
                 ),
               ),
             ],

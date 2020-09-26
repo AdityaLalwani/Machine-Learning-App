@@ -1,27 +1,29 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:tflite/tflite.dart';
-import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
-class Flower extends StatefulWidget {
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:tflite/tflite.dart';
+
+class DogCat extends StatefulWidget {
   @override
-  _Flower createState() => _Flower();
+  _DogCatState createState() => _DogCatState();
 }
 
-class _Flower extends State<Flower> {
-  List _outputs;
+class _DogCatState extends State<DogCat> {
+  bool _isLoading;
   File _image;
-  bool _loading = false;
+  List _output;
 
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
-    _loading = true;
+    _isLoading = true;
 
     loadModel().then((value) {
       setState(() {
-        _loading = false;
+        _isLoading = false;
       });
     });
   }
@@ -33,7 +35,7 @@ class _Flower extends State<Flower> {
         backgroundColor: Colors.black,
         title: Center(
             child: Text(
-          "FLOWER",
+          "Cat-Dog",
           style: GoogleFonts.blackOpsOne(
               textStyle: TextStyle(
             color: Colors.white,
@@ -41,7 +43,7 @@ class _Flower extends State<Flower> {
           )),
         )),
       ),
-      body: _loading
+      body: _isLoading
           ? Container(
               alignment: Alignment.center,
               child: CircularProgressIndicator(),
@@ -56,9 +58,9 @@ class _Flower extends State<Flower> {
                   SizedBox(
                     height: 20,
                   ),
-                  _outputs != null
+                  _output != null
                       ? Text(
-                          "${_outputs[0]["label"]}  ${_outputs[0]["confidence"]}",
+                          "${_output[0]["label"]}",
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 20.0,
@@ -71,7 +73,7 @@ class _Flower extends State<Flower> {
             ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.black87,
-        onPressed: pickImage,
+        onPressed: chooseImage(),
         child: Icon(
           Icons.image,
         ),
@@ -79,27 +81,27 @@ class _Flower extends State<Flower> {
     );
   }
 
-  pickImage() async {
+  chooseImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
     if (image == null) return null;
     setState(() {
-      _loading = true;
+      _isLoading = true;
       _image = image;
     });
-    classifyImage(image);
+    runModel(image);
   }
 
-  classifyImage(File image) async {
+  runModel(File image) async {
     var output = await Tflite.runModelOnImage(
       path: image.path,
-      numResults: 2,
+      numResults: 3,
       threshold: 0.5,
       imageMean: 127.5,
       imageStd: 127.5,
     );
     setState(() {
-      _loading = false;
-      _outputs = output;
+      _isLoading = false;
+      _output = output;
     });
   }
 
@@ -108,11 +110,5 @@ class _Flower extends State<Flower> {
       model: "assets/model.tflite",
       labels: "assets/labels.txt",
     );
-  }
-
-  @override
-  void dispose() {
-    Tflite.close();
-    super.dispose();
   }
 }
