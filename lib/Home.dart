@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sgpa_sem5/colorTexture/screens/detect_screen.dart';
+import 'package:sgpa_sem5/dogcat.dart';
 import 'package:sgpa_sem5/flower.dart';
 
-import 'matrix/Matrix.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,7 +19,7 @@ class _HomePageState extends State<HomePage> {
       gridDelegate:
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),
       children: [
-        //1 snake
+        //1 flower
         Card(
           elevation: 20.0,
           color: Color(0xfff4f4f0),
@@ -46,7 +47,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
 
-        //2 tic tac toe
+        //3. Dog cat
         Card(
           elevation: 20.0,
           color: Color(0xfff4f4f0),
@@ -59,10 +60,10 @@ class _HomePageState extends State<HomePage> {
               InkWell(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MatrixEffect()));
+                      MaterialPageRoute(builder: (context) => DogCat()));
                 },
                 child: Text(
-                  "MATRIX",
+                  "Dog and Cat",
                   style: GoogleFonts.blackOpsOne(
                       textStyle: TextStyle(
                     color: Colors.black,
@@ -74,7 +75,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
 
-        //3 sudoku
+        //4. Color
         Card(
           elevation: 20.0,
           color: Color(0xfff4f4f0),
@@ -85,29 +86,21 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               InkWell(
-                onTap: () {},
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-              ),
-            ],
-          ),
-        ),
-
-        //4 2048
-        Card(
-          elevation: 20.0,
-          color: Color(0xfff4f4f0),
-          shadowColor: Color(0xfff4f4f0),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-          child: Column(
-            children: [
-              InkWell(
-                onTap: () {},
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20.0),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DetectScreen(
+                                title: 'Color Detection',
+                              )));
+                },
+                child: Text(
+                  "Color Texture",
+                  style: GoogleFonts.blackOpsOne(
+                      textStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 32,
+                  )),
                 ),
               ),
             ],

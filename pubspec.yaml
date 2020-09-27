@@ -31,6 +31,8 @@ dependencies:
   image_picker: ^0.6.7
   tflite: any
   google_fonts: ^1.1.0
+  percent_indicator: ^2.1.1+1
+  camera: ^0.5.7+4
 
 dev_dependencies:
   flutter_test:

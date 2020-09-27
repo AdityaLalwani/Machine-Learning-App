@@ -1,29 +1,27 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:tflite/tflite.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class DogCat extends StatefulWidget {
   @override
-  _DogCatState createState() => _DogCatState();
+  _DogCat createState() => _DogCat();
 }
 
-class _DogCatState extends State<DogCat> {
-  bool _isLoading;
+class _DogCat extends State<DogCat> {
+  List _outputs;
   File _image;
-  List _output;
+  bool _loading = false;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _isLoading = true;
+    _loading = true;
 
     loadModel().then((value) {
       setState(() {
-        _isLoading = false;
+        _loading = false;
       });
     });
   }
@@ -35,7 +33,7 @@ class _DogCatState extends State<DogCat> {
         backgroundColor: Colors.black,
         title: Center(
             child: Text(
-          "Cat-Dog",
+          "Dog & Cat",
           style: GoogleFonts.blackOpsOne(
               textStyle: TextStyle(
             color: Colors.white,
@@ -43,7 +41,7 @@ class _DogCatState extends State<DogCat> {
           )),
         )),
       ),
-      body: _isLoading
+      body: _loading
           ? Container(
               alignment: Alignment.center,
               child: CircularProgressIndicator(),
@@ -58,9 +56,9 @@ class _DogCatState extends State<DogCat> {
                   SizedBox(
                     height: 20,
                   ),
-                  _output != null
+                  _outputs != null
                       ? Text(
-                          "${_output[0]["label"]}",
+                          "${_outputs[0]["label"]}  ${(_outputs[0]["confidence"] * 100.0).toStringAsFixed(2)} %",
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 20.0,
@@ -73,7 +71,7 @@ class _DogCatState extends State<DogCat> {
             ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.black87,
-        onPressed: chooseImage(),
+        onPressed: pickImage,
         child: Icon(
           Icons.image,
         ),
@@ -81,34 +79,40 @@ class _DogCatState extends State<DogCat> {
     );
   }
 
-  chooseImage() async {
+  pickImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
     if (image == null) return null;
     setState(() {
-      _isLoading = true;
+      _loading = true;
       _image = image;
     });
-    runModel(image);
+    classifyImage(image);
   }
 
-  runModel(File image) async {
+  classifyImage(File image) async {
     var output = await Tflite.runModelOnImage(
       path: image.path,
-      numResults: 3,
+      numResults: 2,
       threshold: 0.5,
       imageMean: 127.5,
       imageStd: 127.5,
     );
     setState(() {
-      _isLoading = false;
-      _output = output;
+      _loading = false;
+      _outputs = output;
     });
   }
 
   loadModel() async {
     await Tflite.loadModel(
-      model: "assets/model.tflite",
-      labels: "assets/labels.txt",
+      model: "assets/dogcat.tflite",
+      labels: "assets/dogcat.txt",
     );
+  }
+
+  @override
+  void dispose() {
+    Tflite.close();
+    super.dispose();
   }
 }

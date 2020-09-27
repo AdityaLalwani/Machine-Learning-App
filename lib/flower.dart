@@ -58,7 +58,7 @@ class _Flower extends State<Flower> {
                   ),
                   _outputs != null
                       ? Text(
-                          "${_outputs[0]["label"]}  ${_outputs[0]["confidence"]}",
+                          "${_outputs[0]["label"]}  ${(_outputs[0]["confidence"] * 100.0).toStringAsFixed(2)} %",
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 20.0,
@@ -105,8 +105,8 @@ class _Flower extends State<Flower> {
 
   loadModel() async {
     await Tflite.loadModel(
-      model: "assets/model.tflite",
-      labels: "assets/labels.txt",
+      model: "assets/flower.tflite",
+      labels: "assets/flower.txt",
     );
   }
 
