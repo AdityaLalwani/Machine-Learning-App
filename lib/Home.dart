@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sgpa_sem5/MNIST/mnist.dart';
 import 'package:sgpa_sem5/colorTexture/screens/detect_screen.dart';
-import 'package:sgpa_sem5/dogcat.dart';
-import 'package:sgpa_sem5/flower.dart';
+import 'file:///C:/Users/DELL/Downloads/sgpa_sem5/lib/DogVsCat/dogcat.dart';
+import 'file:///C:/Users/DELL/Downloads/sgpa_sem5/lib/flowerRecognition/flower.dart';
 
 // import 'package:google_fonts/google_fonts.dart';
 
@@ -19,23 +20,20 @@ class _HomePageState extends State<HomePage> {
       gridDelegate:
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),
       children: [
-        //1 flower
-        Card(
-          elevation: 20.0,
-          color: Color(0xfff4f4f0),
-          shadowColor: Color(0xfff4f4f0),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-          child: Column(
-            children: [
-              InkWell(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Flower()));
-                },
+        SizedBox(
+          height: 10,
+          child: Card(
+            elevation: 20.0,
+            color: Color(0xfff4f4f0),
+            shadowColor: Color(0xfff4f4f0),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            child: Center(
+              child: InkWell(
+                onTap: () {},
                 child: Text(
-                  "FLOWER",
+                  "Introduction: Learn Basis of ML",
                   style: GoogleFonts.blackOpsOne(
                       textStyle: TextStyle(
                     color: Colors.black,
@@ -43,11 +41,10 @@ class _HomePageState extends State<HomePage> {
                   )),
                 ),
               ),
-            ],
+            ),
           ),
         ),
-
-        //3. Dog cat
+        //1 Dog cat
         Card(
           elevation: 20.0,
           color: Color(0xfff4f4f0),
@@ -75,7 +72,35 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
 
-        //4. Color
+        //2. flower
+        Card(
+          elevation: 20.0,
+          color: Color(0xfff4f4f0),
+          shadowColor: Color(0xfff4f4f0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          child: Column(
+            children: [
+              InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Flower()));
+                },
+                child: Text(
+                  "FLOWER",
+                  style: GoogleFonts.blackOpsOne(
+                      textStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 32,
+                  )),
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        //3. Color
         Card(
           elevation: 20.0,
           color: Color(0xfff4f4f0),
@@ -107,7 +132,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
 
-        //5 tetris
+        //4 Fashion Mnist
         Card(
           elevation: 20.0,
           color: Color(0xfff4f4f0),
@@ -118,8 +143,18 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               InkWell(
-                onTap: () {},
-                child: ClipRRect(),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Mnist()));
+                },
+                child: Text(
+                  "MNIST",
+                  style: GoogleFonts.blackOpsOne(
+                      textStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 32,
+                  )),
+                ),
               ),
             ],
           ),
