@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sgpa_sem5/MNIST/mnist.dart';
 import 'package:sgpa_sem5/colorTexture/screens/detect_screen.dart';
+import 'IntrotoML/Intro.dart';
 import 'file:///C:/Users/DELL/Downloads/sgpa_sem5/lib/DogVsCat/dogcat.dart';
 import 'file:///C:/Users/DELL/Downloads/sgpa_sem5/lib/flowerRecognition/flower.dart';
 
@@ -31,7 +32,10 @@ class _HomePageState extends State<HomePage> {
             ),
             child: Center(
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Intro()));
+                },
                 child: Text(
                   "Introduction: Learn Basis of ML",
                   style: GoogleFonts.blackOpsOne(
