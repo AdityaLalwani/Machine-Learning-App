@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sgpa_sem5/Home.dart';
+import 'package:sgpa_sem5/colors.dart';
 
 void main() {
   runApp(MyApp());
@@ -35,13 +36,13 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: f10,
         title: Center(
             child: Text(
           widget.title,
           style: GoogleFonts.blackOpsOne(
               textStyle: TextStyle(
-            color: Colors.white,
+            color: f4,
             fontSize: 32,
           )),
         )),
