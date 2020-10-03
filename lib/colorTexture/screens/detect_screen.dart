@@ -1,11 +1,13 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:sgpa_sem5/colorTexture/helpers/app_helper.dart';
 import 'package:sgpa_sem5/colorTexture/helpers/camera_helper.dart';
 import 'package:sgpa_sem5/colorTexture/helpers/tflite_helper.dart';
 import 'package:sgpa_sem5/colorTexture/models/result.dart';
+import 'package:sgpa_sem5/colors.dart';
 
 class DetectScreen extends StatefulWidget {
   DetectScreen({Key key, this.title}) : super(key: key);
@@ -67,7 +69,16 @@ class _DetectScreenPageState extends State<DetectScreen>
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        backgroundColor: f10,
+        title: Center(
+            child: Text(
+          widget.title,
+          style: GoogleFonts.blackOpsOne(
+              textStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 32,
+          )),
+        )),
       ),
       body: FutureBuilder<void>(
         future: CameraHelper.initializeControllerFuture,
@@ -104,7 +115,7 @@ class _DetectScreenPageState extends State<DetectScreen>
         child: Container(
           height: 200.0,
           width: width,
-          color: Colors.white,
+          color: f3,
           child: outputs != null && outputs.isNotEmpty
               ? ListView.builder(
                   itemCount: outputs.length,
@@ -141,7 +152,7 @@ class _DetectScreenPageState extends State<DetectScreen>
               : Center(
                   child: Text("Wating for model to detect..",
                       style: TextStyle(
-                        color: Colors.black,
+                        color: f10,
                         fontSize: 20.0,
                       ))),
         ),
@@ -152,7 +163,6 @@ class _DetectScreenPageState extends State<DetectScreen>
   void _setupAnimation() {
     _colorAnimController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 500));
-    _colorTween = ColorTween(begin: Colors.green, end: Colors.red)
-        .animate(_colorAnimController);
+    _colorTween = ColorTween(begin: f7, end: f1).animate(_colorAnimController);
   }
 }

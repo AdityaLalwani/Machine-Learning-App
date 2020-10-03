@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image/image.dart' as imag;
+
 import 'package:tflite/tflite.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+
+import 'classify.dart';
 
 class Mnist extends StatefulWidget {
   @override
@@ -86,16 +91,18 @@ class _Mnist extends State<Mnist> {
       _loading = true;
       _image = image;
     });
-    classifyImage(image);
+    String p = image.path;
+    classifyImage(p);
   }
 
-  classifyImage(File image) async {
-    var output = await Tflite.runModelOnImage(
-      path: image.path,
-      numResults: 2,
-      threshold: 0.5,
-      imageMean: 127.5,
-      imageStd: 127.5,
+  classifyImage(String image) async {
+    var imageBytes = (await rootBundle.load(image)).buffer;
+    imag.Image oriImage = imag.decodeJpg(imageBytes.asUint8List());
+    imag.Image resizedImage = imag.copyResize(oriImage,
+        width: MnistClassifier.imgWidth, height: MnistClassifier.imgHeight);
+    var output = await Tflite.runModelOnBinary(
+      binary: imageToByteListFloat32(
+          resizedImage, MnistClassifier.imgWidth, MnistClassifier.imgHeight),
     );
     setState(() {
       _loading = false;
@@ -104,10 +111,15 @@ class _Mnist extends State<Mnist> {
   }
 
   loadModel() async {
-    await Tflite.loadModel(
-      model: "assets/mnist.tflite",
-      labels: "assets/mnist.txt",
-    );
+    try {
+      await Tflite.loadModel(
+        model: "assets/mnist.tflite",
+        labels: "assets/mnist.txt",
+      );
+      print("Model loaded successfully");
+    } on PlatformException {
+      print('Failed to load model.');
+    }
   }
 
   @override
@@ -115,4 +127,17 @@ class _Mnist extends State<Mnist> {
     Tflite.close();
     super.dispose();
   }
+}
+
+class MnistClassifier {
+  // Model inputs
+  static final int imgWidth = 28;
+  static final int imgHeight = 28;
+  static final int floatSize = 4;
+  static final int pixelSize = 4;
+  static final int modelInputSize =
+      floatSize * imgWidth * imgHeight * pixelSize;
+
+  // Model outputs
+  static final int numClassificationResults = 3;
 }

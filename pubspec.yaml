@@ -33,6 +33,7 @@ dependencies:
   google_fonts: ^1.1.0
   percent_indicator: ^2.1.1+1
   camera: ^0.5.7+4
+  image: any
 
 dev_dependencies:
   flutter_test:
