@@ -50,4 +50,4 @@ dependencies:
 
 ## 6. Gif
 
-![Machine Learning App Gif](https://github.com/AdityaLalwani/Machine-Learning-App/blob/master/Gifs/sgpa-min.gif "Machine Learning App")
+![Machine Learning App Gif](https://github.com/AdityaLalwani/Machine-Learning-App/blob/master/assets/images/sgpa-min.gif "Machine Learning App")
