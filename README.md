@@ -48,6 +48,6 @@ dependencies:
   tflite: ^1.1.1
 ```
 
-## 6. Video
+## 6. Gif
 
-![Machine Learning App Gif]({{https://github.com/AdityaLalwani/Machine-Learning-App/blob/master}}/Gifs/sgpa.gif "Machine Learning App")
+![Machine Learning App Gif](https://github.com/AdityaLalwani/Machine-Learning-App/blob/master/Gifs/sgpa.gif "Machine Learning App")
