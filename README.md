@@ -13,7 +13,7 @@ I have enrolled in some coursera courses but these courses help me a lot for bui
 * [Introduction to TensorFlow for Artificial Intelligence, Machine Learning, and Deep Learning](https://www.coursera.org/learn/introduction-tensorflow)
 * [Device-based Models with TensorFlow Lite](https://www.coursera.org/learn/device-based-models-tensorflow)
 
-## 2. Differnet Models to Train and Delop them in single Application (Custom Based - offline)
+## Differnet Models to Train and Delop them in single Application (Custom Based - offline)
 
 - [x] Dog vs Cat 
 - [x] Flower Recognition (5 Flower)
@@ -30,10 +30,10 @@ I have enrolled in some coursera courses but these courses help me a lot for bui
 
 ### Dataset Collection
 
-* (Dog and cat Dataset - Kaggle)[https://download.microsoft.com/download/3/E/1/3E1C3F21-ECDB-4869-8368-6DEBA77B919F/kagglecatsanddogs_3367a.zip]
-* (Flower Recognition - Tensorflow)[https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz]
-* (MNIST - Keras)[https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz]
-* (Color Detection)[https://cvhci.anthropomatik.kit.edu/~bschauer/datasets/google-512/]
+* [Dog and cat Dataset - Kaggle](https://download.microsoft.com/download/3/E/1/3E1C3F21-ECDB-4869-8368-6DEBA77B919F/kagglecatsanddogs_3367a.zip)
+* [Flower Recognition - Tensorflow](https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz)
+* [MNIST - Keras](https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz)
+* [Color Detection](https://cvhci.anthropomatik.kit.edu/~bschauer/datasets/google-512)
 
 ### Training - Testing
 
@@ -60,14 +60,14 @@ converter = tf.lite.TFLiteConverter.from_concrete_functions([func])
 tflite_model = converter.convert()
 ```
 
-## Deploy these Models in Application using [tflite](https://pub.dev/packages/tflite) package
+### Deploy these Models in Application using [tflite](https://pub.dev/packages/tflite) package
 
-Add this to your package's pubspec.yaml file:
+Add this to your package's pubspec.yaml file:v
 ```
 dependencies:
   tflite: ^1.1.1
 ```
 
-## 6. Gif
+## Gif
 
 ![Machine Learning App Gif](https://github.com/AdityaLalwani/Machine-Learning-App/raw/master/assets/images/sgpa-min.gif "Machine Learning App")
