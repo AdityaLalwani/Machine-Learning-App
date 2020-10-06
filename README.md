@@ -2,27 +2,47 @@
 
 A Flutter application in which user can know What is Machine Learning, How Models are Train and Deployment of these Trained Models. 
 
-## 1. To known What is Machine Learning and To build a Model for Android Devices
+## Abstract
+
+Building a machine Learning model is an easy task nowadays as most algorithms are available and by using these Algorithm we can implement Models. 
+The main task is to known how we can deploy the model in Application. So by using tensorflow tflite model I have deploy Some basic ML models in a single Android Applicaton.
+
+## Useful Courses
 
 I have enrolled in some coursera courses but these courses help me a lot for building this application
 * [Introduction to TensorFlow for Artificial Intelligence, Machine Learning, and Deep Learning](https://www.coursera.org/learn/introduction-tensorflow)
 * [Device-based Models with TensorFlow Lite](https://www.coursera.org/learn/device-based-models-tensorflow)
 
-## 2. Selected Some basic Models to Train and Delop them in single Application (Custom Based - offline)
+## 2. Differnet Models to Train and Delop them in single Application (Custom Based - offline)
 
 - [x] Dog vs Cat 
 - [x] Flower Recognition (5 Flower)
 - [ ] MNIST (1-10 Numbers) 
 - [x] Color Detection (Realtime)
 
-## 3. I have Train these Model from TensorFlow Tutorial, Google Colab and Teachable Machine
+## Project Flow
+
+- Collection of different dataset.
+- Train one part of Dataset
+- Test with the other to known the Accuracy of Model
+- Convert the Model in tflite version
+- Use this Model in Application
+
+### Dataset Collection
+
+* (Dog and cat Dataset - Kaggle)[https://download.microsoft.com/download/3/E/1/3E1C3F21-ECDB-4869-8368-6DEBA77B919F/kagglecatsanddogs_3367a.zip]
+* (Flower Recognition - Tensorflow)[https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz]
+* (MNIST - Keras)[https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz]
+* (Color Detection)[https://cvhci.anthropomatik.kit.edu/~bschauer/datasets/google-512/]
+
+### Training - Testing
 
 - [Cats-v-Dogs.ipynb](https://colab.research.google.com/github/lmoroney/mlday-tokyo/blob/master/Lab6-Cats-v-Dogs.ipynb#scrollTo=G4cwNEH46UAI)
 - [flowers_tf_lite.ipynb](https://colab.research.google.com/github/tensorflow/examples/blob/master/community/en/flowers_tf_lite.ipynb)
 - [MNIST.ipynb](https://colab.research.google.com/github/tensorflow/examples/blob/master/lite/codelabs/digit_classifier/ml/step2_train_ml_model.ipynb)
 - [Color Detection](https://drive.google.com/file/d/1t7KKfyrt_t8QXFvSrv4TImrkM7wl2KEN/view?usp=sharing) Download this dataset and Upload in [Teachable Machine](https://teachablemachine.withgoogle.com/train/image)
 
-## 4. After Training these Models Convert them to tflite format
+### Converting
 
 ```
 # Converting a SavedModel to a TensorFlow Lite model.
@@ -40,7 +60,7 @@ converter = tf.lite.TFLiteConverter.from_concrete_functions([func])
 tflite_model = converter.convert()
 ```
 
-## 5. Now Deploy these Models in Application using [tflite](https://pub.dev/packages/tflite) package
+## Deploy these Models in Application using [tflite](https://pub.dev/packages/tflite) package
 
 Add this to your package's pubspec.yaml file:
 ```
