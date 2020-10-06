@@ -10,7 +10,7 @@ The main task is to known how we can deploy the model in Application. So by usin
 ##  Introduction
 
 Only a small fraction of real-world ML systems is composed of the ML code, as shown by the small black box in the middle (see diagram below). The required surrounding infrastructure is vast and complex.
-![Machine Learning Systems](https://github.com/AdityaLalwani/Machine-Learning-App/blob/master/assets/images/ml.png "Machine Learning Systems")
+![Machine Learning Systems](https://raw.githubusercontent.com/AdityaLalwani/Machine-Learning-App/master/assets/images/ml.png "Machine Learning Systems")
 
 ## Useful Courses
 
