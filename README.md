@@ -7,12 +7,12 @@ A Flutter application in which user can know What is Machine Learning, How Model
 Building a machine Learning model is an easy task nowadays as most algorithms are available and by using these Algorithm we can implement Models. 
 The main task is to known how we can deploy the model in Application. So by using tensorflow tflite model I have deploy Some basic ML models in a single Android Application.
 
-##  Introduction :information_source:
+##  Introduction ![a](https://github.githubassets.com/images/icons/emoji/unicode/2139.png?v8)
 
 Only a small fraction of real-world ML systems is composed of the ML code, as shown by the small black box in the middle (see diagram below). The required surrounding infrastructure is vast and complex.
 ![Machine Learning Systems](https://raw.githubusercontent.com/AdityaLalwani/Machine-Learning-App/master/assets/images/ml.png "Machine Learning Systems")
 
-## Useful Courses :books:
+## Useful Courses ![books](https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8)
 
 I have enrolled in some coursera courses but these courses help me a lot for building this application
 * [Introduction to TensorFlow for Artificial Intelligence, Machine Learning, and Deep Learning](https://www.coursera.org/learn/introduction-tensorflow)
