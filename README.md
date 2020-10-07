@@ -77,6 +77,3 @@ dependencies:
 
 ![Machine Learning App Gif](https://github.com/AdityaLalwani/Machine-Learning-App/raw/master/assets/images/sgpa-min.gif "Machine Learning App")
 
-## Guided by: ![mortar_board](https://github.githubassets.com/images/icons/emoji/unicode/1f393.png?v8)
-
-Amit Parmar Sir
