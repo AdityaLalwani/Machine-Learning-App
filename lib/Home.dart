@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sgpa_sem5/MNIST/mnist.dart';
 import 'package:sgpa_sem5/colorTexture/screens/detect_screen.dart';
 import 'package:sgpa_sem5/colors.dart';
 import 'IntrotoML/Intro.dart';
+import 'MNIST/digitHome.dart';
+// import 'MNIST/recognizer_screen.dart';
 import 'file:///C:/Users/DELL/Downloads/sgpa_sem5/lib/DogVsCat/dogcat.dart';
 import 'file:///C:/Users/DELL/Downloads/sgpa_sem5/lib/flowerRecognition/flower.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // import 'package:google_fonts/google_fonts.dart';
 
@@ -22,7 +24,7 @@ class _HomePageState extends State<HomePage> {
         color: f9,
         child: GridView(
           gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
           children: [
             InkWell(
               onTap: () {
@@ -38,7 +40,103 @@ class _HomePageState extends State<HomePage> {
                 ),
                 child: Center(
                   child: Text(
-                    "Introduction: Learn Basis of ML",
+                    "Basis of ML",
+                    style: GoogleFonts.blackOpsOne(
+                        textStyle: TextStyle(
+                      color: f10,
+                      fontSize: 32,
+                    )),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Intro()));
+              },
+              child: Card(
+                elevation: 20.0,
+                color: f4,
+                shadowColor: f3,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(130.0),
+                ),
+                child: Center(
+                  child: Text(
+                    "Regression",
+                    style: GoogleFonts.blackOpsOne(
+                        textStyle: TextStyle(
+                      color: f10,
+                      fontSize: 32,
+                    )),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Intro()));
+              },
+              child: Card(
+                elevation: 20.0,
+                color: f4,
+                shadowColor: f3,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(130.0),
+                ),
+                child: Center(
+                  child: Text(
+                    "Classification",
+                    style: GoogleFonts.blackOpsOne(
+                        textStyle: TextStyle(
+                      color: f10,
+                      fontSize: 32,
+                    )),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Intro()));
+              },
+              child: Card(
+                elevation: 20.0,
+                color: f4,
+                shadowColor: f3,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(130.0),
+                ),
+                child: Center(
+                  child: Text(
+                    "Clustering",
+                    style: GoogleFonts.blackOpsOne(
+                        textStyle: TextStyle(
+                      color: f10,
+                      fontSize: 32,
+                    )),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Intro()));
+              },
+              child: Card(
+                elevation: 20.0,
+                color: f4,
+                shadowColor: f3,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(130.0),
+                ),
+                child: Center(
+                  child: Text(
+                    "Basis of ML",
                     style: GoogleFonts.blackOpsOne(
                         textStyle: TextStyle(
                       color: f10,
@@ -69,7 +167,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                   RaisedButton(
                     onPressed: () {
-                      print("ouch");
+                      _launchURL(
+                          "https://colab.research.google.com/github/lmoroney/mlday-tokyo/blob/master/Lab6-Cats-v-Dogs.ipynb");
                     },
                     child: Text(
                       "How to Train Model",
@@ -125,7 +224,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                   RaisedButton(
                     onPressed: () {
-                      print("ouch");
+                      _launchURL(
+                          "https://colab.research.google.com/github/tensorflow/examples/blob/master/community/en/flowers_tf_lite.ipynb");
                     },
                     child: Text(
                       "How to Train Model",
@@ -241,7 +341,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                   RaisedButton(
                     onPressed: () {
-                      print("ouch");
+                      _launchURL(
+                          "https://colab.research.google.com/github/tensorflow/examples/blob/master/lite/codelabs/digit_classifier/ml/step7_improve_accuracy.ipynb");
                     },
                     child: Text(
                       "How to Train Model",
@@ -257,8 +358,11 @@ class _HomePageState extends State<HomePage> {
                   ),
                   RaisedButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Mnist()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  HandwrittenNumberRecognizerApp()));
                     },
                     child: Text(
                       "Try It",
@@ -277,5 +381,13 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ));
+  }
+
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

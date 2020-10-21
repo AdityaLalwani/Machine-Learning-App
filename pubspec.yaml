@@ -34,6 +34,8 @@ dependencies:
   percent_indicator: ^2.1.1+1
   camera: ^0.5.7+4
   image: any
+  fl_chart: ^0.8.0
+  url_launcher: ^5.4.0
 
 dev_dependencies:
   flutter_test:

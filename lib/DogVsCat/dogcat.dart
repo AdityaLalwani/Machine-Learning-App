@@ -57,14 +57,23 @@ class _DogCat extends State<DogCat> {
                     height: 20,
                   ),
                   _outputs != null
-                      ? Text(
-                          "${_outputs[0]["label"]}  ${(_outputs[0]["confidence"] * 100.0).toStringAsFixed(2)} %",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20.0,
-                            background: Paint()..color = Colors.white,
-                          ),
-                        )
+                      ? _outputs[0]["confidence"] == 1
+                          ? Text(
+                              "${_outputs[0]["label"]}  ${(_outputs[0]["confidence"] * 100.0).toStringAsFixed(2)} %",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20.0,
+                                background: Paint()..color = Colors.white,
+                              ),
+                            )
+                          : Text(
+                              "None",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20.0,
+                                background: Paint()..color = Colors.white,
+                              ),
+                            )
                       : Container(),
                 ],
               ),
@@ -91,12 +100,12 @@ class _DogCat extends State<DogCat> {
 
   classifyImage(File image) async {
     var output = await Tflite.runModelOnImage(
-      path: image.path,
-      numResults: 2,
-      threshold: 0.5,
-      imageMean: 127.5,
-      imageStd: 127.5,
-    );
+        path: image.path,
+        numResults: 5,
+        threshold: 0.2,
+        imageMean: 0.0,
+        imageStd: 255.0,
+        asynch: true);
     setState(() {
       _loading = false;
       _outputs = output;
