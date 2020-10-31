@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sgpa_sem5/colors.dart';
 
 const double kCanvasSize = 200.0;
 const double kStrokeWidth = 12.0;
@@ -23,10 +24,10 @@ final Paint kWhitePaint = Paint()
 
 final kBackgroundPaint = Paint()..color = kBrushBlack;
 
-const int kModelNumberOutputs = 10;
-const Color kBarColor = Colors.blue;
+const Color kBarColor = f1;
 const Color kBarBackgroundColor = Colors.transparent;
 const double kChartBarWidth = 22;
-const String kWaitingForInputHeaderString = 'Please draw a number in the box below';
+const String kWaitingForInputHeaderString =
+    'Please draw a number in the box below';
 const String kWaitingForInputFooterString = 'Let me guess...';
 const String kGuessingInputString = 'The number you draw is';

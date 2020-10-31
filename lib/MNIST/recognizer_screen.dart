@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sgpa_sem5/Home1.dart';
 import 'package:sgpa_sem5/MNIST/constant.dart';
 import 'package:sgpa_sem5/MNIST/brain.dart';
 import 'package:sgpa_sem5/MNIST/drawing_painter.dart';
-import 'package:fl_chart/fl_chart.dart';
+// import 'package:fl_chart/fl_chart.dart';
+
+import '../colors.dart';
 
 class RecognizerScreen extends StatefulWidget {
   RecognizerScreen({Key key, this.title}) : super(key: key);
@@ -16,7 +20,7 @@ class RecognizerScreen extends StatefulWidget {
 class _RecognizerScreen extends State<RecognizerScreen> {
   List<Offset> points = [];
   AppBrain appBrain = AppBrain();
-  List<BarChartGroupData> chartItems = List();
+  // List<BarChartGroupData> chartItems = List();
   String headerText = 'Header placeholder';
   String footerText = 'Footer placeholder';
 
@@ -24,14 +28,34 @@ class _RecognizerScreen extends State<RecognizerScreen> {
   void initState() {
     super.initState();
     appBrain.loadModel();
-    _buildBarChartInfo();
     _resetLabels();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar(
+        title: Center(
+            child: Text(
+          widget.title,
+          style: GoogleFonts.blackOpsOne(
+              textStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 32,
+          )),
+        )),
+        backgroundColor: f10,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_outlined,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => HomeOne()));
+          },
+        ),
+      ),
       body: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -50,7 +74,7 @@ class _RecognizerScreen extends State<RecognizerScreen> {
             ),
             Container(
               decoration: BoxDecoration(
-                border: Border.all(width: 3.0, color: Colors.blue),
+                border: Border.all(width: 3.0, color: f1),
               ),
               padding: EdgeInsets.all(16),
               child: Builder(builder: _buildCanvas),
@@ -70,34 +94,6 @@ class _RecognizerScreen extends State<RecognizerScreen> {
                           style: Theme.of(context).textTheme.headline,
                         ),
                       ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(32, 32, 32, 16),
-                          child: BarChart(
-                            BarChartData(
-                              maxY: 1.0,
-                              titlesData: FlTitlesData(
-                                show: true,
-                                bottomTitles: SideTitles(
-                                  showTitles: true,
-                                  textStyle: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
-                                  ),
-                                  margin: 6,
-                                  getTitles: (double value) {
-                                    return value.toInt().toString();
-                                  },
-                                ),
-                                leftTitles: SideTitles(showTitles: false),
-                              ),
-                              borderData: FlBorderData(show: false),
-                              barGroups: chartItems,
-                            ),
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -107,11 +103,12 @@ class _RecognizerScreen extends State<RecognizerScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.delete),
+        child: Icon(Icons.autorenew_sharp),
+        backgroundColor: f9,
         onPressed: () {
           setState(() {
             points = List();
-            _buildBarChartInfo();
+
             _resetLabels();
           });
         },
@@ -142,7 +139,6 @@ class _RecognizerScreen extends State<RecognizerScreen> {
         List predictions = await appBrain.processCanvasPoints(points);
         setState(() {
           _setLabelsForGuess(predictions.first['label']);
-          _buildBarChartInfo(recognitions: predictions);
         });
       },
       child: ClipRect(
@@ -154,23 +150,6 @@ class _RecognizerScreen extends State<RecognizerScreen> {
     );
   }
 
-  void _buildBarChartInfo({List recognitions = const []}) {
-    chartItems = List();
-
-    for (int i = 0; i < kModelNumberOutputs; i++) {
-      var barGroup = _makeGroupData(i, 0);
-      chartItems.add(barGroup);
-    }
-
-    for (var recognition in recognitions) {
-      final idx = recognition["index"];
-      if (0 <= idx && idx <= 9) {
-        final confidence = recognition["confidence"];
-        chartItems[idx] = _makeGroupData(idx, confidence);
-      }
-    }
-  }
-
   void _resetLabels() {
     headerText = kWaitingForInputHeaderString;
     footerText = kWaitingForInputFooterString;
@@ -179,20 +158,5 @@ class _RecognizerScreen extends State<RecognizerScreen> {
   void _setLabelsForGuess(String guess) {
     headerText = "Finished guessing!"; // Empty string
     footerText = kGuessingInputString + " " + guess;
-  }
-
-  BarChartGroupData _makeGroupData(int x, double y) {
-    return BarChartGroupData(x: x, barRods: [
-      BarChartRodData(
-        y: y,
-        color: kBarColor,
-        width: kChartBarWidth,
-        backDrawRodData: BackgroundBarChartRodData(
-          show: true,
-          y: 1,
-          color: kBarBackgroundColor,
-        ),
-      ),
-    ]);
   }
 }
