@@ -22,8 +22,8 @@ class AppBrain {
   }
 
   Future<List> processCanvasPoints(List<Offset> points) async {
-    final double canvasSizeWithPadding = kCanvasSize + (2 * kCanvasInnerOffset);
-    final Offset canvasOffset = Offset(kCanvasInnerOffset, kCanvasInnerOffset);
+    final double canvasSizeWithPadding = 200.0 + (2 * 40.0);
+    final Offset canvasOffset = Offset(40.0, 40.0);
     final PictureRecorder recorder = PictureRecorder();
     final Canvas canvas = Canvas(
       recorder,

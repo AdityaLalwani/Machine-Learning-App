@@ -27,7 +27,3 @@ final kBackgroundPaint = Paint()..color = kBrushBlack;
 const Color kBarColor = f1;
 const Color kBarBackgroundColor = Colors.transparent;
 const double kChartBarWidth = 22;
-const String kWaitingForInputHeaderString =
-    'Please draw a number in the box below';
-const String kWaitingForInputFooterString = 'Let me guess...';
-const String kGuessingInputString = 'The number you draw is';

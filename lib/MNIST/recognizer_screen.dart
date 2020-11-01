@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sgpa_sem5/Home1.dart';
-import 'package:sgpa_sem5/MNIST/constant.dart';
+// import 'package:sgpa_sem5/MNIST/constant.dart';
 import 'package:sgpa_sem5/MNIST/brain.dart';
 import 'package:sgpa_sem5/MNIST/drawing_painter.dart';
 // import 'package:fl_chart/fl_chart.dart';
@@ -143,7 +143,7 @@ class _RecognizerScreen extends State<RecognizerScreen> {
       },
       child: ClipRect(
         child: CustomPaint(
-          size: Size(kCanvasSize, kCanvasSize),
+          size: Size(200.0, 200.0),
           painter: DrawingPainter(offsetPoints: points),
         ),
       ),
@@ -151,12 +151,12 @@ class _RecognizerScreen extends State<RecognizerScreen> {
   }
 
   void _resetLabels() {
-    headerText = kWaitingForInputHeaderString;
-    footerText = kWaitingForInputFooterString;
+    headerText = 'Please draw a number in the box below';
+    footerText = 'Let me guess...';
   }
 
   void _setLabelsForGuess(String guess) {
     headerText = "Finished guessing!"; // Empty string
-    footerText = kGuessingInputString + " " + guess;
+    footerText = 'The number you draw is' + " " + guess;
   }
 }
