@@ -3,6 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sgpa_sem5/colors.dart';
 import 'Home1.dart';
 import 'MachineLearning/IntrotoML/Intro.dart';
+import 'MachineLearning/IntrotoML/classification.dart';
+import 'MachineLearning/IntrotoML/clustering.dart';
+import 'MachineLearning/IntrotoML/regression.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -53,8 +56,10 @@ class _HomePageState extends State<HomePage> {
                   width: MediaQuery.of(context).size.width / 2,
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Intro()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Regression()));
                     },
                     child: Card(
                       elevation: 20.0,
@@ -87,8 +92,10 @@ class _HomePageState extends State<HomePage> {
                   width: MediaQuery.of(context).size.width / 2,
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Intro()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Classification()));
                     },
                     child: Card(
                       elevation: 20.0,
@@ -116,8 +123,10 @@ class _HomePageState extends State<HomePage> {
                   width: MediaQuery.of(context).size.width / 2,
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Intro()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Clustering()));
                     },
                     child: Card(
                       elevation: 20.0,

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sgpa_sem5/colors.dart';
 
+import 'card.dart';
+
 class Intro extends StatefulWidget {
   @override
   _IntroState createState() => _IntroState();
@@ -29,6 +31,7 @@ class _IntroState extends State<Intro> {
             Column(
               children: <Widget>[
                 Container(
+                    color: f9,
                     height: MediaQuery.of(context).size.height - 80,
                     child: ListView(
                       children: <Widget>[
@@ -70,70 +73,10 @@ class _IntroState extends State<Intro> {
                           body:
                               "Supervised: Supervised learning is a learning in which we teach or train the machine using data which is well labeled that means some data is already tagged with the correct answer. After that, the machine is provided with a new set of examples(data) so that supervised learning algorithm analyses the training data and produces a correct outcome from labeled data.\n\nSupervised learning classified into two categories of algorithms:\n1. Classification: A classification\n     problem is when the output variable\n     is a category, such as “Red” or “blue”\n     or “disease” and “no disease”.\n2. Regression: A regression problem is\n     when the output variable is a real\n     value, such as “dollars” or “weight”.\n\nUnsupervised: Unsupervised learning is the training of machine using information that is neither classified nor labeled and allowing the algorithm to act on that information without guidance. Here the task of machine is to group unsorted information according to similarities, patterns and differences without any prior training of data. \n\nUnsupervised learning classified into two categories of algorithms:\n1. Clustering: A clustering problem is\n     where you want to discover the\n     inherent groupings in the data, such\n     as grouping customers by\n     purchasing behavior.\n2. Association: An association rule\n     learning problem is where you want\n     to discover rules that describe large\n     portions of your data, such as people\n     that buy X also tend to buy Y.",
                         ),
-                        Carde(
-                          head: "Prerequisites",
-                          body: "Python for data science.",
-                        ),
-                        Carde(
-                          head: "Prerequisites",
-                          body: "Python for data science.",
-                        ),
-                        Carde(
-                          head: "Prerequisites",
-                          body: "Python for data science.",
-                        ),
-                        Carde(
-                          head: "Prerequisites",
-                          body: "Python for data science.",
-                        ),
                       ],
                     ))
               ],
             ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class Carde extends StatelessWidget {
-  final String head;
-
-  final String body;
-  Carde(
-      {this.head = 'Birth of Universe',
-      this.body = "Text which goes inside the body appears over here."});
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: f9,
-      child: Container(
-        margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-        child: ExpansionTile(
-          //gif: gif,
-          title: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  head,
-                  style: TextStyle(
-                    fontFamily: 'BalooBhai',
-                    fontSize: 22,
-                    color: f1,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 7),
-              child: Text(body,
-                  style: TextStyle(
-                      fontFamily: 'BalooBhai', fontSize: 19, color: f4)),
-            )
           ],
         ),
       ),
