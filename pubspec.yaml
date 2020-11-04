@@ -30,7 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   image_picker: ^0.6.7
   tflite: any
-  google_fonts: ^1.1.0
+  google_fonts: ^1.1.1
   percent_indicator: ^2.1.1+1
   camera: ^0.5.7+4
   image: any

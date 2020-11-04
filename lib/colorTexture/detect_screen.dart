@@ -3,17 +3,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:sgpa_sem5/colorTexture/helpers/app_helper.dart';
-import 'package:sgpa_sem5/colorTexture/helpers/camera_helper.dart';
-import 'package:sgpa_sem5/colorTexture/helpers/tflite_helper.dart';
-import 'package:sgpa_sem5/colorTexture/models/result.dart';
+import 'file:///C:/Users/DELL/Downloads/sgpa_sem5/lib/colorTexture/camera_helper.dart';
+import 'file:///C:/Users/DELL/Downloads/sgpa_sem5/lib/colorTexture/tflite_helper.dart';
+import 'file:///C:/Users/DELL/Downloads/sgpa_sem5/lib/colorTexture/result.dart';
 import 'package:sgpa_sem5/colors.dart';
 
 class DetectScreen extends StatefulWidget {
   DetectScreen({Key key, this.title}) : super(key: key);
-
   final String title;
-
   @override
   _DetectScreenPageState createState() => _DetectScreenPageState();
 }
@@ -22,25 +19,19 @@ class _DetectScreenPageState extends State<DetectScreen>
     with SingleTickerProviderStateMixin {
   AnimationController _colorAnimController;
   Animation _colorTween;
-
   List<Result> outputs;
-
   void initState() {
     super.initState();
-
     //Load TFLite Model
     TFLiteHelper.loadModel().then((value) {
       setState(() {
         TFLiteHelper.modelLoaded = true;
       });
     });
-
     //Initialize Camera
     CameraHelper.initializeCamera();
-
     //Setup Animation
     _setupAnimation();
-
     //Subscribe to TFLite's Classify events
     TFLiteHelper.tfLiteResultsController.stream.listen(
         (value) {
@@ -48,10 +39,8 @@ class _DetectScreenPageState extends State<DetectScreen>
             _colorAnimController.animateTo(element.confidence,
                 curve: Curves.bounceIn, duration: Duration(milliseconds: 500));
           });
-
           //Set Results
           outputs = value;
-
           //Update results on screen
           setState(() {
             //Set bit to false to allow detection again
@@ -59,9 +48,7 @@ class _DetectScreenPageState extends State<DetectScreen>
           });
         },
         onDone: () {},
-        onError: (error) {
-          AppHelper.log("listen", error);
-        });
+        );
   }
 
   @override
@@ -104,7 +91,6 @@ class _DetectScreenPageState extends State<DetectScreen>
   void dispose() {
     TFLiteHelper.disposeModel();
     CameraHelper.camera.dispose();
-    AppHelper.log("dispose", "Clear resources.");
     super.dispose();
   }
 

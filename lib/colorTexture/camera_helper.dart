@@ -1,9 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:sgpa_sem5/colorTexture/helpers/tflite_helper.dart';
-
-import 'app_helper.dart';
+import 'file:///C:/Users/DELL/Downloads/sgpa_sem5/lib/colorTexture/tflite_helper.dart';
 
 class CameraHelper {
   static CameraController camera;
@@ -21,18 +19,13 @@ class CameraHelper {
   }
 
   static void initializeCamera() async {
-    AppHelper.log("_initializeCamera", "Initializing camera..");
-
     camera = CameraController(
         await _getCamera(_direction),
-        defaultTargetPlatform == TargetPlatform.iOS
-            ? ResolutionPreset.low
-            : ResolutionPreset.high,
+        defaultTargetPlatform == TargetPlatform.android
+            ? ResolutionPreset.high
+            : ResolutionPreset.low,
         enableAudio: false);
     initializeControllerFuture = camera.initialize().then((value) {
-      AppHelper.log(
-          "_initializeCamera", "Camera initialized, starting camera stream..");
-
       camera.startImageStream((CameraImage image) {
         if (!TFLiteHelper.modelLoaded) return;
         if (isDetecting) return;

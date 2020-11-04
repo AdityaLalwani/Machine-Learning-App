@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart' as im;
@@ -61,8 +60,8 @@ class AppBrain {
     im.Image imImage = im.decodeImage(pngUint8List);
     im.Image resizedImage = im.copyResize(
       imImage,
-      width: kModelInputSize,
-      height: kModelInputSize,
+      width: 28,
+      height: 28,
     );
 
     return predictImage(resizedImage);
@@ -88,13 +87,5 @@ class AppBrain {
     }
 
     return convertedBytes.buffer.asUint8List();
-  }
-
-  double convertPixel(int color) {
-    return (255 -
-            (((color >> 16) & 0xFF) * 0.299 +
-                ((color >> 8) & 0xFF) * 0.587 +
-                (color & 0xFF) * 0.114)) /
-        255.0;
   }
 }

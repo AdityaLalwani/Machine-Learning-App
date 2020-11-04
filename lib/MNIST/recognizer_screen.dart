@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sgpa_sem5/Home1.dart';
-// import 'package:sgpa_sem5/MNIST/constant.dart';
 import 'package:sgpa_sem5/MNIST/brain.dart';
 import 'package:sgpa_sem5/MNIST/drawing_painter.dart';
-// import 'package:fl_chart/fl_chart.dart';
-
 import '../colors.dart';
 
 class RecognizerScreen extends StatefulWidget {
@@ -68,7 +65,7 @@ class _RecognizerScreen extends State<RecognizerScreen> {
                 child: Text(
                   headerText,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline,
+                  style: Theme.of(context).textTheme.headline5,
                 ),
               ),
             ),
@@ -91,7 +88,7 @@ class _RecognizerScreen extends State<RecognizerScreen> {
                       Center(
                         child: Text(
                           footerText,
-                          style: Theme.of(context).textTheme.headline,
+                          style: Theme.of(context).textTheme.headline5,
                         ),
                       ),
                     ],

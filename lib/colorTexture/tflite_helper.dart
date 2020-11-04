@@ -1,10 +1,7 @@
 import 'dart:async';
-
 import 'package:camera/camera.dart';
-import 'package:sgpa_sem5/colorTexture/models/result.dart';
+import 'file:///C:/Users/DELL/Downloads/sgpa_sem5/lib/colorTexture/result.dart';
 import 'package:tflite/tflite.dart';
-
-import 'app_helper.dart';
 
 class TFLiteHelper {
   static StreamController<List<Result>> tfLiteResultsController =
@@ -13,8 +10,6 @@ class TFLiteHelper {
   static var modelLoaded = false;
 
   static Future<String> loadModel() async {
-    AppHelper.log("loadModel", "Loading model..");
-
     return Tflite.loadModel(
       model: "assets/color.tflite",
       labels: "assets/color.txt",
@@ -29,23 +24,15 @@ class TFLiteHelper {
             numResults: 5)
         .then((value) {
       if (value.isNotEmpty) {
-        AppHelper.log("classifyImage", "Results loaded. ${value.length}");
-
         //Clear previous results
         _outputs.clear();
-
         value.forEach((element) {
           _outputs.add(Result(
               element['confidence'], element['index'], element['label']));
-
-          AppHelper.log("classifyImage",
-              "${element['confidence']} , ${element['index']}, ${element['label']}");
         });
       }
-
       //Sort results according to most confidence
       _outputs.sort((a, b) => a.confidence.compareTo(b.confidence));
-
       //Send results
       tfLiteResultsController.add(_outputs);
     });

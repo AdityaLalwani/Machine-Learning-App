@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// import 'package:sgpa_sem5/Home.dart';
 import 'package:sgpa_sem5/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'DogVsCat/dogcat.dart';
 import 'MNIST/digitHome.dart';
-import 'colorTexture/screens/detect_screen.dart';
+import 'colorTexture/detect_screen.dart';
 import 'flowerRecognition/flower.dart';
 import 'main.dart';
 
@@ -275,11 +274,8 @@ class _HomeOneState extends State<HomeOne> {
                 ),
                 RaisedButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                HandwrittenNumberRecognizerApp()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => DigitHome()));
                   },
                   child: Text(
                     "Try It",
