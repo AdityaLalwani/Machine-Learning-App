@@ -101,7 +101,7 @@ class _DogCat extends State<DogCat> {
   classifyImage(File image) async {
     var output = await Tflite.runModelOnImage(
         path: image.path,
-        numResults: 5,
+        numResults: 2,
         threshold: 0.2,
         imageMean: 0.0,
         imageStd: 255.0,

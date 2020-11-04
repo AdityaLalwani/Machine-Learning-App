@@ -22,7 +22,7 @@ I have enrolled in some coursera courses but these courses help me a lot for bui
 
 - [x] Dog vs Cat 
 - [x] Flower Recognition (5 Flower)
-- [ ] MNIST (1-10 Numbers) 
+- [x] MNIST (1-10 Numbers) 
 - [x] Color Detection (Realtime)
 
 ## Project Flow ![flow](https://github.githubassets.com/images/icons/emoji/unicode/23f3.png?v8)
@@ -31,7 +31,7 @@ I have enrolled in some coursera courses but these courses help me a lot for bui
 - Train one part of Dataset
 - Test with the other to known the Accuracy of Model
 - Convert the Model in tflite version
-- Use this Model in Application
+- Deploy this Model in Android Application
 
 ### Dataset Collection ![memo](https://github.githubassets.com/images/icons/emoji/unicode/1f4dd.png?v8)
 
@@ -65,12 +65,55 @@ converter = tf.lite.TFLiteConverter.from_concrete_functions([func])
 tflite_model = converter.convert()
 ```
 
-### Deploy these Models in Application using [tflite](https://pub.dev/packages/tflite) package ![cyclone](https://github.githubassets.com/images/icons/emoji/unicode/1f300.png?v8)
+## Deployment ![cyclone](https://github.githubassets.com/images/icons/emoji/unicode/1f300.png?v8)
 
-Add this to your package's pubspec.yaml file:v
+### Add [tflite](https://pub.dev/packages/tflite) package in pubspec.yaml 
 ```
 dependencies:
   tflite: ^1.1.1
+```
+
+### Every tensorflow (tflite) model gives 3 different output that are 
+1. index
+2. label
+3. confidence.
+
+### The dog and cat model and flower recognition model both are deployed by using tflite package function runModelOnImage() 
+
+```
+var output = await Tflite.runModelOnImage(
+      path: image.path,
+      numResults: 2,
+      threshold: 0.5,
+      imageMean: 127.5,
+      imageStd: 127.5,
+    );
+```
+
+### For MNIST model I have used canvas to create an image which will be resized to 28x28px that is the same size of image we used to train our model. Then will convert this image to list of Uint8 and run runModelOnBinary() method. 
+
+```
+var output = await Tflite.runModelOnBinary(
+      binary: imageToByteListFloat32(image, 224, 127.5, 127.5),// required
+      numResults: 6,    // defaults to 5
+      threshold: 0.05,  // defaults to 0.1
+      asynch: true      // defaults to true
+);
+```
+### For Color Detection model I have used method runModelOnFrame() as this model is real-time based and image is changing every frame by frame. 
+
+```
+var output = await Tflite.runModelOnFrame(
+      bytesList: img.planes.map((plane) {return plane.bytes;}).toList(),// required
+      imageHeight: img.height,
+      imageWidth: img.width,
+      imageMean: 127.5,   // defaults to 127.5
+      imageStd: 127.5,    // defaults to 127.5
+      rotation: 90,       // defaults to 90, Android only
+      numResults: 2,      // defaults to 5
+      threshold: 0.1,     // defaults to 0.1
+      asynch: true        // defaults to true
+);
 ```
 
 ## Gif ![tada](https://github.githubassets.com/images/icons/emoji/unicode/1f389.png?v8)
